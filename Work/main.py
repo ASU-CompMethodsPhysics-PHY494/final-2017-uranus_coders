@@ -153,7 +153,7 @@ if __name__ == "__main__":
     plt.show()
     
     ax = plt.subplot()
-    t, r, v = integrate_orbits(dt = .05, t_max = 1000)
+    t, r, v = integrate_orbits(dt = 1, t_max = 100000)
     star = np.zeros(len(r))
     rMercury = r[:,0]
     rVenus = r[:,1]

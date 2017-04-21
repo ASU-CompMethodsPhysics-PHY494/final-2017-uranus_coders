@@ -5,6 +5,7 @@
 # values used from:
 # https://solarsystem.nasa.gov/planets/
 # http://www.astronomynotes.com/tables/tablesb.htm
+# http://www.windows2universe.org/our_solar_system/planets_orbits_table.html
 
 import numpy as np
 
@@ -16,56 +17,56 @@ solar_system = {
         'radius':2.4397e3,   # in km
         'eccentricity':0.20563593,
         'period':87.969,   # days
-        'semi-major':   # au
+        'semi-major':0.3871 * 1e3   # 1e-3 au
     },
     'venus': {
         'mass':4.867e24,    # in kg
         'radius':6.0518e3,   # in km
         'eccentricity':0.00677672,
         'period':224.701,   # days
-        'semi-major':   # au
+        'semi-major':0.7233 * 1e3   # 1e-3 au
     },
     'earth':  {
         'mass':5.972e24,   # in kg
         'radius': 6.371e3,  # in km
         'eccentricity':0.01671123,
         'period':365.25,   # days
-        'semi-major':   # au
+        'semi-major':1.000 * 1e3   # 1e-3 au
     },
     'mars': {
         'mass':6.4169e23,    # in kg
         'radius':3.3895e3,   # in km
         'eccentricity':0.0933941,
         'period':686.98,   # days
-        'semi-major':   # au
+        'semi-major':1.5273 * 1e3   # 1e-3 au
     },
     'jupiter': {
         'mass':1.8981e27,    # in kg
         'radius':6.9911e4,   # in km
         'eccentricity':0.04838624,
         'period':11.862 * yr2day,   # days
-        'semi-major':   # au
+        'semi-major':5.2028 * 1e3   # 1e-3 au
     },
     'saturn': {
         'mass':5.6832e26,    # in kg
         'radius':5.8232e4,   # in km
         'eccentricity':0.05386179,
         'period':29.457 * yr2day,   # days
-        'semi-major':   # au
+        'semi-major':9.5388 * 1e3   # 1e-3 au
     },
     'uranus': {
         'mass':8.6810e25,    # in kg
         'radius':2.5362e4,   # in km
         'eccentricity':0.04725744,
         'period':84.011 * yr2day,   # days
-        'semi-major':   # au
+        'semi-major':19.1914 * 1e3   # 1e-3 au
     },
     'neptune': {
         'mass':1.0241e26,    # in kg
         'radius':2.4622e4,   # in km
         'eccentricity':0.00859048,
-        'period':164.79 * yr2day   # days
-        'semi-major':   # au
+        'period':164.79 * yr2day,   # days
+        'semi-major':30.0611 * 1e3   # 1e-3 au
     },
     'sun': {
         'mass':1.989e30,     # in kg
@@ -83,8 +84,15 @@ au = astronomical_unit
 # - semi-major: in 1e-3 au (e.g., 11.11 -> 11.11e-3 au)
 # - eccentricity: unit-less
 planets = {
-    'name': np.array(['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 
-                      'Uranus', 'Neptune']),
+    'name': np.array(['Mercury', 
+                      'Venus', 
+                      'Earth', 
+                      'Mars', 
+                      'Jupiter', 
+                      'Saturn', 
+                      'Uranus', 
+                      'Neptune']),
+                      
     'mass': np.array([solar_system['mercury']['mass'] / solar_system['sun']['mass'],
                       solar_system['venus']['mass'] / solar_system['sun']['mass'],
                       solar_system['earth']['mass'] / solar_system['sun']['mass'],
@@ -93,15 +101,16 @@ planets = {
                       solar_system['saturn']['mass'] / solar_system['sun']['mass'],
                       solar_system['uranus']['mass'] / solar_system['sun']['mass'],
                       solar_system['neptune']['mass'] / solar_system['sun']['mass']]),
-    'period': np.array([solar_system['mercury']['radius'] / solar_system['earth']['radius'],
-                        2.4218233, 
-                        4.04961,
-                        6.099615,   
-                        9.20669,  
-                        12.35294,
-                        0,
-                        0,
-                        0]),   # Value at index 9 is supposed to be the velocity of the celestial object
+
+    'period': np.array([solar_system['mercury']['period'],
+                        solar_system['venus']['period'],
+                        solar_system['earth']['period'],
+                        solar_system['mars']['period'],
+                        solar_system['jupiter']['period'],
+                        solar_system['saturn']['period'],
+                        solar_system['uranus']['period'],
+                        solar_system['neptune']['period']]),   # Value at index 9 is supposed to be the velocity of the celestial object
+                        
     'radius': np.array([solar_system['mercury']['radius'] / solar_system['earth']['radius'],
                         solar_system['venus']['radius'] / solar_system['earth']['radius'],
                         solar_system['earth']['radius'] / solar_system['earth']['radius'],
@@ -110,8 +119,16 @@ planets = {
                         solar_system['saturn']['radius'] / solar_system['earth']['radius'],
                         solar_system['uranus']['radius'] / solar_system['earth']['radius'],
                         solar_system['neptune']['radius'] / solar_system['earth']['radius']]),
-    'semi-major': np.array([ 11.11,  15.21,  21.44,
-                             28.17,  37.1 ,  45.1 ]),
+
+    'semi-major': np.array([solar_system['mercury']['semi-major'],
+                            solar_system['venus']['semi-major'],
+                            solar_system['earth']['semi-major'],
+                            solar_system['mars']['semi-major'],
+                            solar_system['jupiter']['semi-major'],
+                            solar_system['saturn']['semi-major'],
+                            solar_system['uranus']['semi-major'],
+                            solar_system['neptune']['semi-major']]),
+
     'eccentricity': np.array([solar_system['mercury']['eccentricity'],
                               solar_system['venus']['eccentricity'],
                               solar_system['earth']['eccentricity'],
