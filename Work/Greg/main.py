@@ -118,7 +118,7 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     matplotlib.style.use("ggplot")
     
-    t, r, v = integrate_orbits(dt = .05, t_max = 1.5)
+    t, r, v = integrate_orbits(dt = .0005, t_max = 1.5)
     rMercury = r[:,0]
     rVenus = r[:,1]
     rEarth = r[:,2]
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     rSaturn = r[:,5]
     rUranus = r[:,6]
     rNeptune = r[:,7]
-    #rCO = r[:,8]
+#    rCO = r[:,8]
     
     ax = plt.subplot()
     ax.plot(0, 0, "ro", label="Sun")
@@ -139,8 +139,8 @@ if __name__ == "__main__":
     ax.plot(rSaturn[:,0], rSaturn[:,1], label="Planet Saturn")
     ax.plot(rUranus[:,0], rUranus[:,1], label="Planet Uranus")
     ax.plot(rNeptune[:,0], rNeptune[:,1], label="Planet Neptune")
-    #ax.plot(rCO[:,0], rCO[:,1], label="Celestial Object")
-    ax.legend(loc="best")
+#    ax.plot(rCO[:,0], rCO[:,1], label="Celestial Object")
+#    ax.legend(loc="best")
     ax.set_xlabel(r"$x$ (AU)")
     ax.set_ylabel(r"$y$ (AU)")
     ax.set_title("Orbits for 1.5 days")
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     rSaturn = r[:,5]
     rUranus = r[:,6]
     rNeptune = r[:,7]
-    #rCO = r[:,8]
+#    rCO = r[:,8]
 
     ax.plot(0, 0, "ro", label="Sun")
     ax.plot(rMercury[:,0], rMercury[:,1], label="Planet Mercury")
@@ -174,8 +174,8 @@ if __name__ == "__main__":
     ax.plot(rSaturn[:,0], rSaturn[:,1], label="Planet Saturn")
     ax.plot(rUranus[:,0], rUranus[:,1], label="Planet Uranus")
     ax.plot(rNeptune[:,0], rNeptune[:,1], label="Planet Neptune")
-    #ax.plot(rCO[:,0], rCO[:,1], label="Celestial Object")
-    ax.legend(loc="best")
+#    ax.plot(rCO[:,0], rCO[:,1], label="Celestial Object")
+#    ax.legend(loc="best")
     ax.set_xlabel(r"$x$ (AU)")
     ax.set_ylabel(r"$y$ (AU)")
     ax.set_title("Solar System Orbits")     
