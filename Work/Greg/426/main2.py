@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Mar 19 13:35:42 2017
+
 @author: Vishal
 """
-
-#2 dimensions
 import math
 import numpy as np
 import parameters
@@ -15,7 +14,9 @@ import parameters
 # \description Initial position r_max = r_max = semi_major_a * (1 + eccentricity). 
 # \return [-r_max, 0]
 
-def initial_position(a, ecc):
+#I commented out your initial condition functions and made my own
+
+"""def initial_position(a, ecc):
     if(ecc == 0.0):
         # TODO - Determine appropriate initial position
         return np.array(0, parameters.planets['semi-major'][8])  # Object 9 is celestial object. Value is initial distance away from sun instead of semi-major axis value.
@@ -32,17 +33,31 @@ def initial_velocity(a, ecc):
     v2 = parameters.G_local * parameters.star['mass'] * (1 - ecc) / (a * (1 + ecc))
     v_ap = math.sqrt(v2)
     return np.array([0, v_ap])
+"""
+
+def initial_position(theta0, phi0, distance):
+    a = np.deg2rad(theta0)
+    b = np.deg2rad(phi0)
+    #return distance * np.array([np.cos(x), np.sin(x)])
+    return distance * np.array([np.cos(b)*np.cos(a), np.cos(b)*np.sin(a), np.sin(b)])
+
+def initial_velocity(theta0, phi0, distance, period):
+    x = np.deg2rad(theta0)
+    v = 2*np.pi*distance/period
+    return v * np.array([np.sin(x), -np.cos(x), 0])
 
 # \description Calculate the force between 2 objects
 # \return Force    
 def F_gravity(r, m, M):
     """Force due to gravity between two masses.
+
     Parameters
     ----------
     r : array
       distance vector (x, y)
     m, M : float
       masses of the two bodies
+
     Returns
     -------
     array
@@ -84,19 +99,19 @@ def F_planets(positions):
         
 # \description t_max in days
 # \return position and velocity values of planets. [timeStep, numPlanets, positions/velocity]
-def integrate_orbits(dt=1, t_max=1000):
+#def integrate_orbits(dt=1, t_max=1000):
     nsteps = int(t_max/dt)
     time = dt * np.arange(nsteps)
 
     # shape = (step, planet, x/y)
-    r = np.zeros((nsteps, len(parameters.planets['name']), 2))
+    r = np.zeros((nsteps, len(parameters.planets['name']), 3))
     v = np.zeros_like(r)
     
     length = len(parameters.planets['name'])
     # Set initial conditions
     for i in range(length):
-        r[0, i, :] = initial_position(parameters.planets['distance'][i], parameters.planets['eccentricity'][i])
-        v[0, i, :] = initial_velocity(parameters.planets['distance'][i], parameters.planets['eccentricity'][i])
+        r[0, i, :] = initial_position(parameters.planets['theta0'][i], parameters.planets['phi0'][i], parameters.planets['distance'][i])
+        v[0, i, :] = initial_velocity(parameters.planets['theta0'][i], parameters.planets['phi0'][i], parameters.planets['distance'][i], parameters.planets['period'][i])
 
     masses = np.zeros((length, 1))
     for i in range(length):

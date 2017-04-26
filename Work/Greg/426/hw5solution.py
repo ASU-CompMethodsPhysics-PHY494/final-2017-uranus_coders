@@ -195,13 +195,13 @@ if __name__ == "__main__":
 
 
     print("Simulating Uranus and Neptune orbits WITHOUT interactions")
-    time, r0, v0 = integrate_orbits(t_max=160, coupled=False)
+    time, r0, v0 = integrate_orbits(t_max=30, coupled=False)
     rU0 = r0[:, 0]
     vU0 = v0[:, 0]
     omegaU0 = omega(vU0, rU0)
 
     print("Simulating Uranus and Neptune orbits WITH interactions")
-    time, r, v = integrate_orbits(t_max=160, coupled=True)
+    time, r, v = integrate_orbits(t_max=30, coupled=True)
     rU = r[:, 0]
     rN = r[:, 1]
     vU = v[:, 0]
@@ -215,10 +215,10 @@ if __name__ == "__main__":
     #---------
 
     # plot orbits
-    fig_orbits = "uranus_neptune_orbits.pdf"
-    fig_anomaly = "uranus_anomaly.pdf"
+    #fig_orbits = "uranus_neptune_orbits.pdf"
+    #fig_anomaly = "uranus_anomaly.pdf"
 
-    ax = plt.subplot(1,2,1)
+    ax = plt.subplot()
     ax.plot(rU[:,0], rU[:, 1], label="Uranus")
     ax.plot(rN[:,0], rN[:, 1], label="Neptune")
     ax.plot(rU0[:,0], rU0[:,1], linestyle="--", label="Uranus (no Neptune)")
@@ -227,8 +227,8 @@ if __name__ == "__main__":
     ax.set_ylabel(r"$y$ (AU)")
     ax.legend(loc="upper right")
     ax.set_title("Uranus and Neptune orbits")
-
-    ax = plt.subplot(1,2,2)
+    plt.show()
+""" ax = plt.subplot(1,2,2)
     ax.plot(time, DeltaOmegaU)
     ax.set_xlabel("years")
     ax.set_ylabel(r"Uranus anomaly $\Delta\omega_U$")
@@ -237,4 +237,7 @@ if __name__ == "__main__":
     ax.figure.savefig(fig_anomaly)
     print("Uranus anomaly plotted in {0}".format(fig_anomaly))
 
-
+"""
+print(r)
+print(r)[0]
+print(r)[0,0]

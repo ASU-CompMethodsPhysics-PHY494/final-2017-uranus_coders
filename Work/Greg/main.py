@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Mar 19 13:35:42 2017
-
 @author: Vishal
 """
+
+#2 dimensions
 import math
 import numpy as np
 import parameters
@@ -13,6 +14,7 @@ import parameters
 
 # \description Initial position r_max = r_max = semi_major_a * (1 + eccentricity). 
 # \return [-r_max, 0]
+
 def initial_position(a, ecc):
     if(ecc == 0.0):
         # TODO - Determine appropriate initial position
@@ -35,14 +37,12 @@ def initial_velocity(a, ecc):
 # \return Force    
 def F_gravity(r, m, M):
     """Force due to gravity between two masses.
-
     Parameters
     ----------
     r : array
       distance vector (x, y)
     m, M : float
       masses of the two bodies
-
     Returns
     -------
     array
@@ -95,8 +95,8 @@ def integrate_orbits(dt=1, t_max=1000):
     length = len(parameters.planets['name'])
     # Set initial conditions
     for i in range(length):
-        r[0, i, :] = initial_position(parameters.planets['semi-major'][i], parameters.planets['eccentricity'][i])
-        v[0, i, :] = initial_velocity(parameters.planets['semi-major'][i], parameters.planets['eccentricity'][i])
+        r[0, i, :] = initial_position(parameters.planets['distance'][i], parameters.planets['eccentricity'][i])
+        v[0, i, :] = initial_velocity(parameters.planets['distance'][i], parameters.planets['eccentricity'][i])
 
     masses = np.zeros((length, 1))
     for i in range(length):
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     matplotlib.style.use("ggplot")
     
-    t, r, v = integrate_orbits(dt = .0005, t_max = 1.5)
+    t, r, v = integrate_orbits(dt = .05, t_max = 1.5)
     rMercury = r[:,0]
     rVenus = r[:,1]
     rEarth = r[:,2]
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     rSaturn = r[:,5]
     rUranus = r[:,6]
     rNeptune = r[:,7]
-#    rCO = r[:,8]
+    #rCO = r[:,8]
     
     ax = plt.subplot()
     ax.plot(0, 0, "ro", label="Sun")
@@ -139,8 +139,8 @@ if __name__ == "__main__":
     ax.plot(rSaturn[:,0], rSaturn[:,1], label="Planet Saturn")
     ax.plot(rUranus[:,0], rUranus[:,1], label="Planet Uranus")
     ax.plot(rNeptune[:,0], rNeptune[:,1], label="Planet Neptune")
-#    ax.plot(rCO[:,0], rCO[:,1], label="Celestial Object")
-#    ax.legend(loc="best")
+    #ax.plot(rCO[:,0], rCO[:,1], label="Celestial Object")
+    ax.legend(loc="best")
     ax.set_xlabel(r"$x$ (AU)")
     ax.set_ylabel(r"$y$ (AU)")
     ax.set_title("Orbits for 1.5 days")
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     rSaturn = r[:,5]
     rUranus = r[:,6]
     rNeptune = r[:,7]
-#    rCO = r[:,8]
+    #rCO = r[:,8]
 
     ax.plot(0, 0, "ro", label="Sun")
     ax.plot(rMercury[:,0], rMercury[:,1], label="Planet Mercury")
@@ -174,8 +174,8 @@ if __name__ == "__main__":
     ax.plot(rSaturn[:,0], rSaturn[:,1], label="Planet Saturn")
     ax.plot(rUranus[:,0], rUranus[:,1], label="Planet Uranus")
     ax.plot(rNeptune[:,0], rNeptune[:,1], label="Planet Neptune")
-#    ax.plot(rCO[:,0], rCO[:,1], label="Celestial Object")
-#    ax.legend(loc="best")
+    #ax.plot(rCO[:,0], rCO[:,1], label="Celestial Object")
+    ax.legend(loc="best")
     ax.set_xlabel(r"$x$ (AU)")
     ax.set_ylabel(r"$y$ (AU)")
     ax.set_title("Solar System Orbits")     

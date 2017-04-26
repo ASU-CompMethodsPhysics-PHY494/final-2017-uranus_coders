@@ -22,7 +22,7 @@ solar_system = {
         'period':87.969,   # days
         'semi-major':0.3871 * 1e3,   # 1e-3 au
         'distance':0.466 * 1e3, # au
-        'theta0':161.10, # degrees
+        'theta0':177.04, # degrees
         'phi0':-3.27 #degrees
     },
     'venus': {
@@ -32,8 +32,8 @@ solar_system = {
         'period':224.701,   # days
         'semi-major':0.7233 * 1e3,   # 1e-3 au
         'distance':0.720 * 1e3, # au
-        'theta0':90.08, # degrees
-        'phi0':-3.68 #degrees
+        'theta0':106.02, # degrees
+        'phi0':3.28 #degrees
     },
     'earth':  {
         'mass':5.972e24,   # in kg

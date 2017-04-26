@@ -11,90 +11,62 @@ import numpy as np
 
 yr2day = 365.25
 
-#theta0 and distance information from https://omniweb.gsfc.nasa.gov/coho/helios/planet.html
-#date of data is 01/01/2000
-
 solar_system = {
     'mercury': {
         'mass':3.301e23,    # in kg
         'radius':2.4397e3,   # in km
         'eccentricity':0.20563593,
         'period':87.969,   # days
-        'semi-major':0.3871 * 1e3,   # 1e-3 au
-        'distance':0.466 * 1e3, # au
-        'theta0':161.10, # degrees
-        'phi0':-3.27 #degrees
+        'semi-major':0.3871 * 1e3   # 1e-3 au
     },
     'venus': {
         'mass':4.867e24,    # in kg
         'radius':6.0518e3,   # in km
         'eccentricity':0.00677672,
         'period':224.701,   # days
-        'semi-major':0.7233 * 1e3,   # 1e-3 au
-        'distance':0.720 * 1e3, # au
-        'theta0':90.08, # degrees
-        'phi0':-3.68 #degrees
+        'semi-major':0.7233 * 1e3   # 1e-3 au
     },
     'earth':  {
         'mass':5.972e24,   # in kg
         'radius': 6.371e3,  # in km
         'eccentricity':0.01671123,
         'period':365.25,   # days
-        'semi-major':1.000 * 1e3,   # 1e-3 au
-        'distance':0.983 * 1e3, # au
-        'theta0':23.92, # degrees
-        'phi0':-3.28 #degrees
-
+        'semi-major':1.000 * 1e3   # 1e-3 au
     },
     'mars': {
         'mass':6.4169e23,    # in kg
         'radius':3.3895e3,   # in km
         'eccentricity':0.0933941,
         'period':686.98,   # days
-        'semi-major':1.5273 * 1e3,   # 1e-3 au
-        'distance':1.391 * 1e3, # au
-        'theta0':283.50, # degrees
-        'phi0':-3.28 #degrees
+        'semi-major':1.5273 * 1e3   # 1e-3 au
     },
     'jupiter': {
         'mass':1.8981e27,    # in kg
         'radius':6.9911e4,   # in km
         'eccentricity':0.04838624,
         'period':11.862 * yr2day,   # days
-        'semi-major':5.2028 * 1e3,   # 1e-3 au
-        'distance':4.967 * 1e3, # au
-        'theta0':320.54, # degrees
-        'phi0':-3.28 #degrees
+        'semi-major':5.2028 * 1e3   # 1e-3 au
     },
     'saturn': {
         'mass':5.6832e26,    # in kg
         'radius':5.8232e4,   # in km
         'eccentricity':0.05386179,
         'period':29.457 * yr2day,   # days
-        'semi-major':9.5388 * 1e3,   # 1e-3 au
-        'distance':9.139 * 1e3, # au
-        'theta0':330.11, # degrees
-        'phi0':-3.28 #degrees
+        'semi-major':9.5388 * 1e3   # 1e-3 au
     },
     'uranus': {
         'mass':8.6810e25,    # in kg
         'radius':2.5362e4,   # in km
         'eccentricity':0.04725744,
         'period':84.011 * yr2day,   # days
-        'semi-major':19.1914 * 1e3,   # 1e-3 au
-        'distance':19.907 * 1e3, # au
-        'theta0':240.65, # degrees
-        'phi0':-3.28 #degrees
+        'semi-major':19.1914 * 1e3   # 1e-3 au
     },
     'neptune': {
         'mass':1.0241e26,    # in kg
         'radius':2.4622e4,   # in km
         'eccentricity':0.00859048,
         'period':164.79 * yr2day,   # days
-        'semi-major':30.0611 * 1e3,   # 1e-3 au
-        'distance':30.087 * 1e3, # au
-        'theta0':227.96, # degrees
-        'phi0':-3.28 #degrees
+        'semi-major':30.0611 * 1e3   # 1e-3 au
     },
     'sun': {
         'mass':1.989e30,     # in kg
@@ -164,43 +136,7 @@ planets = {
                               solar_system['jupiter']['eccentricity'],
                               solar_system['saturn']['eccentricity'],
                               solar_system['uranus']['eccentricity'],
-                              solar_system['neptune']['eccentricity']]),
-
-    'distance': np.array([solar_system['mercury']['distance'],
-                            solar_system['venus']['distance'],
-                            solar_system['earth']['distance'],
-                            solar_system['mars']['distance'],
-                            solar_system['jupiter']['distance'],
-                            solar_system['saturn']['distance'],
-                            solar_system['uranus']['distance'],
-                            solar_system['neptune']['distance']]),
-
-    'theta0': np.array([solar_system['mercury']['theta0'],
-                            solar_system['venus']['theta0'],
-                            solar_system['earth']['theta0'],
-                            solar_system['mars']['theta0'],
-                            solar_system['jupiter']['theta0'],
-                            solar_system['saturn']['theta0'],
-                            solar_system['uranus']['theta0'],
-                            solar_system['neptune']['theta0']]),
-
-    'phi0': np.array([solar_system['mercury']['phi0'],
-                            solar_system['venus']['phi0'],
-                            solar_system['earth']['phi0'],
-                            solar_system['mars']['phi0'],
-                            solar_system['jupiter']['phi0'],
-                            solar_system['saturn']['phi0'],
-                            solar_system['uranus']['phi0'],
-                            solar_system['neptune']['phi0']]),
-
-    'rxy': np.array([solar_system['mercury']['distance'] * np.cos(solar_system['mercury']['phi0']),
-                            solar_system['venus']['distance'] * np.cos(solar_system['venus']['phi0']),
-                            solar_system['earth']['distance'] * np.cos(solar_system['earth']['phi0']),
-                            solar_system['mars']['distance'] * np.cos(solar_system['mars']['phi0']),
-                            solar_system['jupiter']['distance'] * np.cos(solar_system['jupiter']['phi0']),
-                            solar_system['saturn']['distance'] * np.cos(solar_system['saturn']['phi0']),
-                            solar_system['uranus']['distance'] * np.cos(solar_system['uranus']['phi0']),
-                            solar_system['neptune']['distance'] * np.cos(solar_system['neptune']['phi0'])])
+                              solar_system['neptune']['eccentricity'],])
 }
 
 star = {
