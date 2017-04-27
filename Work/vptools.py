@@ -18,7 +18,7 @@ def simulate(t_max = 433, dt = 0.1):
 
 	scene2 = canvas(title="Solar System")
 
-	sun = sphere(pos=vector(0,0,0), texture=textures.sun, make_trail=True, canvas=scene2, radius=50)
+	sun = sphere(pos=vector(0,0,0), color=color.orange, make_trail=True, canvas=scene2, radius=50)
 	mercury = sphere(pos=vector(rA[0,0,0],rA[0,0,1],rA[0,0,2]), color=color.gray(0.5), make_trail=True, canvas=scene2, radius=50)
 	venus = sphere(pos=vector(rA[0,1,0],rA[0,1,1],rA[0,1,2]), color=color.yellow, make_trail=True, canvas=scene2, radius=50)
 	earth = sphere(pos=vector(rA[0,2,0],rA[0,2,1],rA[0,2,2]), color=color.blue, make_trail=True, canvas=scene2, radius=50)
