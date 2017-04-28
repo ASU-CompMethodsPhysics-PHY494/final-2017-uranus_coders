@@ -1,8 +1,7 @@
 from vpython import *
 import numpy as np
 import math
-import main
-import parameters
+import main_mine as main
 import matplotlib
 import matplotlib.pyplot as plt
 
