@@ -154,7 +154,7 @@ def colVel(mass, velocity):
     return retVel
 
 # \description Create a path for celestial object
-def objectPos(steps, t, pos):
+def objectPos(t, pos):
 #    r = np.zeros((steps, 2))
     r = np.zeros((t+1, 2))
     vel = -1 * parameters.celestial_object['velocity_magnitude']    # Object coming from bottom
