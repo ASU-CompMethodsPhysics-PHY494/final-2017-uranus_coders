@@ -42,10 +42,15 @@ def simulate(t_max=t_max, dt=dt):
 	saturn = sphere(pos=vector(rA[0,5,0],rA[0,5,1],rA[0,5,2]), color=color.green, make_trail=True, canvas=scene2, radius=50)
 	uranus = sphere(pos=vector(rA[0,6,0],rA[0,6,1],rA[0,6,2]), color=color.cyan, make_trail=True, canvas=scene2, radius=50)
 	neptune = sphere(pos=vector(rA[0,7,0],rA[0,7,1],rA[0,7,2]), color=color.white, make_trail=True, canvas=scene2, radius=50)
+	#CO = sphere(pos=vector(rCO[0, 0],rCO[0, 1],rCO[0, 2]), color=color.blue, make_trail=True, canvas=scene2, radius=50)
 	CO = sphere(pos=vector(rA[0,8,0],rA[0,8,1],rA[0,8,2]), color=color.blue, make_trail=True, canvas=scene2, radius=50)
 	planets = (mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, CO)
 
 	return rA, vA, planets, nsteps
+
+def canvas(scene):
+	bar, d = 30, 8
+	return(int(scene.x+d), int(scene.y+bar), int(scene.width-d), int(scene.height-d))
 
 def solplot(t_max=t_max, dt=dt, r8=10):
 	rA, vA, planets, nsteps = simulate(t_max = t_max, dt = dt)
@@ -57,9 +62,11 @@ def solplot(t_max=t_max, dt=dt, r8=10):
 		while j < len(planets):
 			planets[j].pos = vector(rA[i,j,0], rA[i,j,1], rA[i,j,2])
 			j += 1
-		label(pos=vector(8000,6000,0), text='Day ' + str(i*10), canvas=scene2)
-		label(pos=vector(8000,2000,0), text='Year ' + str(int(i/365)), canvas=scene2)
-		label(pos=vector(8000,-2000,0), text='Jovian Year ' + str(int(i/365/11.86)), canvas=scene2)
-		label(pos=vector(8000,-6000,0), text='Years to impact ' + str(int((2*parameters.solar_system['jupiter']['period']-i)/365)), canvas=scene2)
+		label(pos=vector(-10,7.5,0), text='Day ' + str(i), canvas=scene3)
+		label(pos=vector(-10,2.5,0), text='Year ' + str(int(i/365)), canvas=scene3)
+		label(pos=vector(-10,-2.5,0), text='Jovian Year ' + str(int(i/365/11.86)), canvas=scene3)
+		label(pos=vector(-10,-7.5,0), text='Years to impact ' + str(int(10*parameters.solar_system['jupiter']['period']-i)), canvas=scene3)
 		
 		i += 1	
+	container.show()
+

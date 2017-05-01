@@ -1,0 +1,3 @@
+*add planet textures back in
+*find a way to record(vpython runs very slowly as the simulation runs)
+*finish wiki

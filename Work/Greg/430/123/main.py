@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Mar 19 13:35:42 2017
-
 @author: Vishal
 """
 import math
@@ -33,14 +32,12 @@ def initial_velocity(a, ecc):
 # \return Force    
 def F_gravity(r, m, M):
     """Force due to gravity between two masses.
-
     Parameters
     ----------
     r : array
       distance vector (x, y)
     m, M : float
       masses of the two bodies
-
     Returns
     -------
     array
@@ -143,8 +140,7 @@ def integrate_orbits(dt=1, t_max=1000, collision_time=int(10*parameters.solar_sy
             v[i+1, JUPITER,:] = vhalf + 0.5*dt * Ftdt[JUPITER]/masses[JUPITER]
             # new force becomes old force
             Ft = Ftdt
-    
-    return time, r, v, coPos
+    return time, r, v
 
 # \description perfectly inelastic collision with a celestial object
 def colVel(mass, velocity):
@@ -219,4 +215,3 @@ if __name__ == "__main__":
 #    ax = plt.subplot()
 #    ax.plot(val)
     # TEST
-    
