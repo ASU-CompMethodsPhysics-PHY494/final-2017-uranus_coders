@@ -81,7 +81,7 @@ celestial_object = {
         'eccentricity':0.0,
         'period':0.0,
         'semi-major':0.0,
-        'velocity_magnitude':0.5,   # VELOCITY OF OBJECT AT COLLISION
+        'velocity_magnitude':1.0,   # VELOCITY OF OBJECT AT COLLISION
         'initial_position':55000.0   # INITIAL POSITION OF OBJECT FROM SUN
 }
 

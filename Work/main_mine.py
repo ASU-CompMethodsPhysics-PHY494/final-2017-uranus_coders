@@ -124,13 +124,14 @@ def integrate_orbits(dt=1, t_max=1000, collision_time=int(10*parameters.solar_sy
         # new force becomes old force
         Ft = Ftdt 
         
-        # TODO: for celestial object 
         if(collision_time == time[i]):
             JUPITER = 4
             
             print("COLLISION OCCURED AT TIME = " + str(time[i]) + " at iteration = " + str(i))
             print("POSITION = " + str(r[i, JUPITER]))
             
+            # Calculate position of celestial object
+            coPos = objectPos(time[i], r[i, JUPITER])
             
             v[i][JUPITER] = colVel(masses[JUPITER], v[i][JUPITER])   # Change velocity for collision
             masses[JUPITER] += parameters.celestial_object['mass']    # Change jupiter masss
@@ -143,20 +144,26 @@ def integrate_orbits(dt=1, t_max=1000, collision_time=int(10*parameters.solar_sy
             # new force becomes old force
             Ft = Ftdt
     
-    return time, r, v
+    return time, r, v, coPos
 
 # \description perfectly inelastic collision with a celestial object
 def colVel(mass, velocity):
-    # TODO: Determine appropriate velocity
-    objectVel = np.array([parameters.celestial_object['velocity_magnitude'], 0.0])    
+    objectVel = np.array([0.0, parameters.celestial_object['velocity_magnitude']])    
     m = parameters.celestial_object['mass']
     retVel = (mass * velocity + m * objectVel) / (mass + m)
     return retVel
 
-def linear_acc(t):
-    pos = -1 * parameters.G_local * t**2 + parameters.celestial_object['semi-major']
-    vel = -1 * parameters.G_local * t
-    return pos, vel
+# \description Create a path for celestial object
+def objectPos(steps, t, pos):
+#    r = np.zeros((steps, 2))
+    r = np.zeros((t+1, 2))
+    vel = -1 * parameters.celestial_object['velocity_magnitude']    # Object coming from bottom
+    
+    for i in range(t, -1, -1):
+        r[i] = np.array([pos[0], (t - i) * vel + pos[1]])
+    
+    return r
+    
 
 if __name__ == "__main__":    
     import matplotlib
@@ -166,7 +173,7 @@ if __name__ == "__main__":
     p = parameters.solar_system['jupiter']['period']
     
     ax = plt.subplot()
-    t, r, v = integrate_orbits(dt = 1, t_max = 20 * p )
+    t, r, v, rCO = integrate_orbits(dt = 1, t_max = 20 * p )
     star = np.zeros(len(r))
     rMercury = r[:,0]
     rVenus = r[:,1]
@@ -176,9 +183,7 @@ if __name__ == "__main__":
     rSaturn = r[:,5]
     rUranus = r[:,6]
     rNeptune = r[:,7]
-#    rCO = r[:,8]
     
-    i = int(p)
     ax.plot(0, 0, "ro", label="Sun")
     ax.plot(rMercury[:,0], rMercury[:,1], label="Mercury")
     ax.plot(rVenus[:,0], rVenus[:,1], label="Venus")
@@ -188,13 +193,16 @@ if __name__ == "__main__":
     ax.plot(rSaturn[:,0], rSaturn[:,1], label="Saturn")
     ax.plot(rUranus[:,0], rUranus[:,1], label="Uranus")
     ax.plot(rNeptune[:,0], rNeptune[:,1], label="Neptune")
-#    ax.plot(rCO[:,0], rCO[:,1], label="Celestial Object")
+    ax.plot(rCO[:,0], rCO[:,1], label="Celestial Object")
 #    ax.legend(loc="best")
+    
+    # TEST
 #    vJ = v[:,4]
 #    ax.plot(vJ[:,0], rJupiter[:,1], label="Jupiter Velocity")
     
 #    ax.plot(t[:], rJupiter[:,0], label="Jupiter")    
 #    ax.plot(t[:], rJupiter[:,1], label="Jupiter")
+    # TEST    
     
     ax.set_xlabel(r"$x$ (AU)")
     ax.set_ylabel(r"$y$ (AU)")
@@ -205,3 +213,10 @@ if __name__ == "__main__":
     
     # Put a legend to the right of the current axis
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    
+    # TEST
+#    val = objectPos(100000, 43325, [-5453.645, 64.738])
+#    ax = plt.subplot()
+#    ax.plot(val)
+    # TEST
+    
