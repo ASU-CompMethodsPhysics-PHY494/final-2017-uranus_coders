@@ -1,0 +1,7 @@
+Dynamics of the Solar System
+
+Scout Smith, Vishal Mehta
+
+There are many celestial objects wandering in our universe waiting to destroy our solar system. If one of those objects were to collide with jupiter, the heaviest planet in our solar system, how would that affect earth? The goal of this project is to determine changes in Earth’s orbit as a celestial object collides with Jupiter. Our major hurdles were to determine how collision would occur and how to simulate all of the orbits (including collision) in VPython. Two equations were very important in creating this simulation: Newton’s universal law of gravitation and perfectly inelastic collisions. However, we used Velocity Verlet in Python to calculate the positions and velocities of the planets at each time step. Our results indicated, as we would naturally expect, the bigger the momentum of the celestial object, the more impact it had on Earth’s orbit. The goal was achieved as we saw great difference in earth’s orbit for celestial object having high momentum and almost no difference in Earth’s orbit for celestial object having very low momentum. For future work, we can model the path and the collision more realistically.
+
+Code is available here: https://github.com/ASU-CompMethodsPhysics-PHY494/final-2017-uranus_coders/tree/master/Work
