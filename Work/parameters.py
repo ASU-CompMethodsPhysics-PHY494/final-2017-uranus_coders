@@ -74,7 +74,7 @@ solar_system = {
     }
 }
 
-SCALE_FACTOR = 50
+SCALE_FACTOR = 0.5
 celestial_object = {
         'mass': solar_system['jupiter']['mass'] * SCALE_FACTOR / solar_system['sun']['mass'],    # in kg
         'radius':solar_system['jupiter']['mass'] * SCALE_FACTOR,   # in km
