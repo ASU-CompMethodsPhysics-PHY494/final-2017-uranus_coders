@@ -74,14 +74,14 @@ solar_system = {
     }
 }
 
-SCALE_FACTOR = 0.5
+SCALE_FACTOR = 4
 celestial_object = {
         'mass': solar_system['jupiter']['mass'] * SCALE_FACTOR / solar_system['sun']['mass'],    # in kg
         'radius':solar_system['jupiter']['mass'] * SCALE_FACTOR,   # in km
         'eccentricity':0.0,
         'period':0.0,
         'semi-major':0.0,
-        'velocity_magnitude':1.0,   # VELOCITY OF OBJECT AT COLLISION
+        'velocity_magnitude':0.1,   # VELOCITY OF OBJECT AT COLLISION
         'initial_position':55000.0   # INITIAL POSITION OF OBJECT FROM SUN
 }
 

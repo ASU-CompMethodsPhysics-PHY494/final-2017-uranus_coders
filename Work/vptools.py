@@ -8,10 +8,10 @@ import parameters
 import matplotlib
 import matplotlib.pyplot as plt
 
-t_max = int(3*parameters.solar_system['jupiter']['period'])
+t_max = int(4*parameters.solar_system['jupiter']['period'])
 dt = 1
 scene2 = canvas(title="Solar System")
-scene3 = canvas(title="Stats")
+#scene3 = canvas(title="Stats")
 
 def simulate(t_max=t_max, dt=dt):
 	nsteps = int(t_max/dt)
@@ -42,12 +42,12 @@ def simulate(t_max=t_max, dt=dt):
 	saturn = sphere(pos=vector(rA[0,5,0],rA[0,5,1],rA[0,5,2]), color=color.green, make_trail=True, canvas=scene2, radius=50)
 	uranus = sphere(pos=vector(rA[0,6,0],rA[0,6,1],rA[0,6,2]), color=color.cyan, make_trail=True, canvas=scene2, radius=50)
 	neptune = sphere(pos=vector(rA[0,7,0],rA[0,7,1],rA[0,7,2]), color=color.white, make_trail=True, canvas=scene2, radius=50)
-	CO = sphere(pos=vector(rA[0,8,0],rA[0,8,1],rA[0,8,2]), color=color.blue, make_trail=True, canvas=scene2, radius=50)
+	CO = sphere(pos=vector(rA[0,8,0],rA[0,8,1],rA[0,8,2]), color=color.magenta, make_trail=True, canvas=scene2, radius=50)
 	planets = (mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, CO)
 
 	return rA, vA, planets, nsteps
 
-def solplot(t_max=t_max, dt=dt, r8=10):
+def solplot(t_max=t_max, dt=dt, r8=75):
 	rA, vA, planets, nsteps = simulate(t_max = t_max, dt = dt)
 	i = 0
 	fnum = 0
@@ -57,9 +57,9 @@ def solplot(t_max=t_max, dt=dt, r8=10):
 		while j < len(planets):
 			planets[j].pos = vector(rA[i,j,0], rA[i,j,1], rA[i,j,2])
 			j += 1
-		label(pos=vector(8000,6000,0), text='Day ' + str(i*10), canvas=scene2)
-		label(pos=vector(8000,2000,0), text='Year ' + str(int(i/365)), canvas=scene2)
-		label(pos=vector(8000,-2000,0), text='Jovian Year ' + str(int(i/365/11.86)), canvas=scene2)
-		label(pos=vector(8000,-6000,0), text='Years to impact ' + str(int((2*parameters.solar_system['jupiter']['period']-i)/365)), canvas=scene2)
+		#label(pos=vector(8000,6000,0), text='Day ' + str(i*10), canvas=scene2)
+		#label(pos=vector(8000,2000,0), text='Year ' + str(int(i/365)), canvas=scene2)
+		#label(pos=vector(8000,-2000,0), text='Jovian Year ' + str(int(i/365/11.86)), canvas=scene2)
+		#label(pos=vector(8000,-6000,0), text='Years to impact ' + str(int((2*parameters.solar_system['jupiter']['period']-i)/365)), canvas=scene2)
 		
 		i += 1	
