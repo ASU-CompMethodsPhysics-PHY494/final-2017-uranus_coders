@@ -8,7 +8,7 @@ import parameters
 import matplotlib
 import matplotlib.pyplot as plt
 
-t_max = int(4*parameters.solar_system['jupiter']['period'])
+t_max = int(20*parameters.solar_system['jupiter']['period'])
 dt = 1
 scene2 = canvas(title="Solar System")
 #scene3 = canvas(title="Stats")
@@ -47,19 +47,33 @@ def simulate(t_max=t_max, dt=dt):
 
 	return rA, vA, planets, nsteps
 
-def solplot(t_max=t_max, dt=dt, r8=75):
+def timer(nsteps):
+	day = np.zeros(nsteps-1)
+	year = np.zeros_like(day)
+	jyear = np.zeros_like(day)
+	iyear = np.zeros_like(day)
+	while i < nsteps-1:
+		day[i] = str(i)
+		year[i] = str(int(100*i/365)/100)
+		jyear[i] = str(int(100*i/(365*11.86))/100)
+		iyear[i] = str(int((100*2*parameters.solar_system['jupiter']['period']-i)/365)/100)
+		i += 1
+	return day, year, jyear, iyear
+
+def solplot(t_max=t_max, dt=dt, r8=200):
 	rA, vA, planets, nsteps = simulate(t_max = t_max, dt = dt)
 	i = 0
 	fnum = 0
+	timer(nsteps)
 	while i < nsteps-1:
 		rate(r8)
 		j = 0
 		while j < len(planets):
 			planets[j].pos = vector(rA[i,j,0], rA[i,j,1], rA[i,j,2])
 			j += 1
-		#label(pos=vector(8000,6000,0), text='Day ' + str(i*10), canvas=scene2)
-		#label(pos=vector(8000,2000,0), text='Year ' + str(int(i/365)), canvas=scene2)
-		#label(pos=vector(8000,-2000,0), text='Jovian Year ' + str(int(i/365/11.86)), canvas=scene2)
-		#label(pos=vector(8000,-6000,0), text='Years to impact ' + str(int((2*parameters.solar_system['jupiter']['period']-i)/365)), canvas=scene2)
+		label(pos=vector(-100, 100,0), text='Day ' + str(i*10), canvas=scene2)
+		label(pos=vector(-100,-100,0), text='Year ' + str(int(i/365)), canvas=scene2)
+		label(pos=vector(100, 100,0), text='Jovian Year ' + str(int(i/365/11.86)), canvas=scene2)
+		label(pos=vector(100,-100,0), text='Years to impact ' + str(int((2*parameters.solar_system['jupiter']['period']-i)/365)), canvas=scene2)
 		
 		i += 1	
